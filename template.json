@@ -1,0 +1,13 @@
+{
+    "name": "Telegram Fullscreen",
+    "description": "Responsive Telegram Template",
+    "customProperties": [
+        {
+            "name": "backgroundColor",
+            "label": "Background Color",
+            "description": "Background color of the page",
+            "type": "string",
+            "defaultValue": "#000000"
+        }
+    ]
+}
