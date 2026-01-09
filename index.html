@@ -37,6 +37,45 @@
             width: 100%;
             height: 100%;
             object-fit: contain; /* Это делает "резиновость" без искажений */
+            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+            outline: none;
+        }
+
+        #loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: {{{ BACKGROUNDCOLOR }}};
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none; /* Чтобы нельзя было нажать сквозь него */
+        }
+
+        #progress-bar-container {
+            width: 200px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2); /* Тусклый белый фон */
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        #progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background-color: #FFFFFF; /* Чисто белая полоска */
+            transition: width 0.2s linear;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Легкое свечение */
         }
     </style>
 </head>
@@ -106,9 +145,13 @@
         }
 
         createUnityInstance(canvas, config, (progress) => {
-            // Тут пока пусто, лоадер отключили
+            progressBarFill.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-            // Игра загрузилась
+            loadingScreen.classList.add("hidden");
+
+            setTimeout(() => {
+                loadingScreen.style.display = "none";
+            }, 500);
         }).catch((message) => {
             alert(message);
         });
