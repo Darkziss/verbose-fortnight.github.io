@@ -12,48 +12,31 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; 
-            background-color: #151626;
+            overflow: hidden; /* Убираем скроллбары */
         }
 
+        /* Применяем цвет из настроек Unity */
+        body {
+            background-color: #0F101C;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Контейнер для игры */
         #unity-container {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #151626;
-        }
-
-        #unity-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #151626;
         }
 
         /* Канвас: занимай все место, но сохраняй пропорции */
         #unity-canvas {
             width: 100%;
             height: 100%;
-            display: block;
-        }
-
-        @media (min-aspect-ratio: 9/16.1) {
-            #unity-wrapper {
-                /* Ограничиваем высоту, чтобы окно не прилипало к краям браузера */
-                width: auto;
-                aspect-ratio: 9 / 16; /* Фиксируем пропорцию */
-                
-                /* Глубокая внешняя тень */
-                box-shadow: 0 20px 80px rgba(0, 0, 0, 0.8), 
-                            0 0 20px rgba(0, 0, 0, 0.5);
-                
-                overflow: hidden;    /* Чтобы канвас не вылезал за скругление */
-            }
+            object-fit: contain; /* Это делает "резиновость" без искажений */
         }
 
         #loading-screen {
@@ -62,7 +45,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #151626;
+            background-color: #0F101C;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -96,13 +79,11 @@
 </head>
 <body>
     <div id="unity-container">
-        <div id="unity-wrapper"> <!-- Обертка для контроля пропорций и тени -->
-            <canvas id="unity-canvas"></canvas>
+        <canvas id="unity-canvas"></canvas>
 
-            <div id="loading-screen">
-                <div id="progress-bar-container">
-                    <div id="progress-bar-fill"></div>
-                </div>
+        <div id="loading-screen">
+            <div id="progress-bar-container">
+                <div id="progress-bar-fill"></div>
             </div>
         </div>
     </div>
@@ -156,7 +137,7 @@
         var buildUrl = "Build";
         var loaderUrl = buildUrl + "/e65f904acecbcacfed4ff3a3196bca31.loader.js";
         var config = {
-            dataUrl: buildUrl + "/c772c9ad7cfc651a90394fbb3d9afefd.data.unityweb",
+            dataUrl: buildUrl + "/1ca90b30512977c747ec187e06cda26c.data.unityweb",
             frameworkUrl: buildUrl + "/46f8e7703deb319f972a6dccd6dd940a.framework.js.unityweb",
             codeUrl: buildUrl + "/20e7568222d062f588c056cb47880ac2.wasm.unityweb",
             streamingAssetsUrl: "StreamingAssets",
